@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-    <form @submit.prevent="$emit('search-movies')" id="searchBar">
+    <form @submit.prevent="$emit('search-movies', inputSearch)" id="searchBar">
         <input type="text" placeholder="cerca" v-model.trim="inputSearch">
         <button>Cerca</button>
     </form>
