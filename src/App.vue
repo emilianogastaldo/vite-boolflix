@@ -16,14 +16,25 @@ export default {
         store.listMovies = res.data.results
       })
     }
+  },
+  created() {
+    this.fetchMovies();
   }
 
 }
 </script>
 
 <template>
-  <AppHeader @search-movies="fetchMovies" />
-  <h1 class="text-center">ciao</h1>
+  <AppHeader />
+  <main>
+    <div v-for="movie in store.listMovies">
+
+      <p>{{ movie.name }}</p>
+      <p>{{ movie.original_name }}</p>
+      <p>{{ movie.original_language }}</p>
+      <p>{{ movie.vote_average }}</p>
+    </div>
+  </main>
 </template>
 
 <style lang="scss">
