@@ -16,8 +16,16 @@ export default {
 <template>
     <p> <strong>{{ show.title }} {{ show.name }}</strong></p>
     <p>{{ show.original_title }} {{ show.original_name }}</p>
-    <img class="img-fluid w-50" :src="getUrlImg" :alt="show.original_language">
+    <img v-if="show.original_language == 'en' || show.original_language == 'it'" class="img-fluid w-50" :src="getUrlImg"
+        :alt="show.original_language">
+    <div v-else class="noflag">{{ show.original_language }}</div>
     <p>{{ show.vote_average }}</p>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.noflag {
+    height: 40px;
+    width: 40px;
+    background-color: blue;
+}
+</style>
