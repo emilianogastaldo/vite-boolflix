@@ -11,8 +11,8 @@ export default {
     <main>
         <div v-for="(movie, i) in movies" :key="movie.id">
             <p>movie</p>
-            <p>{{ movie.name }}</p>
-            <p>{{ movie.original_name }}</p>
+            <p>{{ movie.title }}</p>
+            <p>{{ movie.original_title }}</p>
             <p>{{ movie.original_language }}</p>
             <p>{{ movie.vote_average }}</p>
         </div>
