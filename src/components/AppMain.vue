@@ -1,21 +1,18 @@
 <script>
+import SectionMain from './SectionMain.vue';
 export default {
     name: 'AppMain',
+    components: { SectionMain },
     props: {
-        movies: Object
+        shows: Object
     }
 }
 </script>
 
 <template>
     <main>
-        <div v-for="(movie, i) in movies" :key="movie.id">
-            <p>movie</p>
-            <p>{{ movie.title }}</p>
-            <p>{{ movie.original_title }}</p>
-            <p>{{ movie.original_language }}</p>
-            <p>{{ movie.vote_average }}</p>
-        </div>
+        <SectionMain :shows="shows.listMovies" title="Movies" />
+        <SectionMain :shows="shows.listTvShows" title="TV Shows" />
     </main>
 </template>
 
