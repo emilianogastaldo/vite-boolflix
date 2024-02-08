@@ -5,6 +5,7 @@ export default {
         show: Object,
     },
     computed: {
+        // Creo delle computed per i titoli e scrivere più veloce la lingua
         title() {
             return this.show.title || this.show.name;
         },
@@ -14,6 +15,8 @@ export default {
         lang() {
             return this.show.original_language;
         },
+
+        // controllo se c'è l'immagine che mi interessa
         isImage() {
             const flags = ['en', 'it'];
             return flags.includes(this.lang);
@@ -26,11 +29,16 @@ export default {
 </script>
 
 <template>
-    <p> <strong>{{ title }}</strong></p>
-    <p>{{ originalTitle }}</p>
-    <img v-if="isImage" class="img-fluid w-50" :src="srcImg" :alt="lang">
-    <div v-else class="noflag">{{ lang }}</div>
-    <p>{{ show.vote_average }}</p>
+    <!-- Card singola dello show -->
+    <ul>
+        <li><strong>{{ title }}</strong></li>
+        <li>{{ originalTitle }}</li>
+        <li>
+            <img v-if="isImage" class="img-fluid w-50" :src="srcImg" :alt="lang">
+            <div v-else class="noflag">{{ lang }}</div>
+        </li>
+        <li>{{ show.vote_average }}</li>
+    </ul>
 </template>
 
 <style lang="scss" scoped>
