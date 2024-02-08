@@ -4,6 +4,10 @@ export default {
     data: () => ({
         inputSearch: '',
     }),
+    props: {
+        buttonLabel: String,
+        placeholder: String
+    },
     emits: ['search-movies']
 }
 </script>
@@ -12,8 +16,8 @@ export default {
     <header>
 
         <form @submit.prevent="$emit('search-movies', inputSearch)" id="searchBar">
-            <input type="text" placeholder="cerca" v-model.trim="inputSearch">
-            <button>Cerca</button>
+            <input type="text" :placeholder="placeholder" v-model.trim="inputSearch">
+            <button>{{ buttonLabel }}</button>
         </form>
     </header>
 </template>
