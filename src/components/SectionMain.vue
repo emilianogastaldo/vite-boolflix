@@ -15,7 +15,6 @@ export default {
         <h4 v-if="shows.length">{{ title }}</h4>
         <div class="row">
             <div class="col-2" v-for="show in shows" :key="show.id">
-                <!-- <p>{{ show }}</p> -->
                 <CardShow :show="show" />
             </div>
         </div>
@@ -27,7 +26,7 @@ main {
     padding-top: 100px;
 }
 
-.row {
-    flex-wrap: nowrap;
-}
+// .row {
+//     flex-wrap: nowrap;
+// }
 </style>
