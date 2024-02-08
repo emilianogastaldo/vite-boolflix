@@ -21,8 +21,14 @@ export default {
             const flags = ['en', 'it'];
             return flags.includes(this.lang);
         },
-        srcImg() {
+        flagImg() {
             return new URL(`../assets/img/${this.lang}.png`, import.meta.url).href;
+        },
+        showImg() {
+            return `https://image.tmdb.org/t/p/w342${this.show.poster_path}`
+        },
+        showVote() {
+            return Math.floor(parseInt(this.show.vote_average) / 2);
         }
     },
 }
@@ -31,20 +37,23 @@ export default {
 <template>
     <!-- Card singola dello show -->
     <ul>
+        <li>
+            <img v-if="show.poster_path" class="img-fluid" :src="showImg" :alt="title">
+            <div v-else class="noflag"> NO IMMAGINE </div>
+        </li>
         <li><strong>{{ title }}</strong></li>
         <li>{{ originalTitle }}</li>
         <li>
-            <img v-if="isImage" class="img-fluid w-50" :src="srcImg" :alt="lang">
+            <img v-if="isImage" class="img-fluid w-50" :src="flagImg" :alt="lang">
             <div v-else class="noflag">{{ lang }}</div>
         </li>
-        <li>{{ show.vote_average }}</li>
+        <li>{{ show.vote_average }} {{ showVote }}</li>
     </ul>
 </template>
 
 <style lang="scss" scoped>
 .noflag {
-    height: 40px;
-    width: 40px;
-    background-color: blue;
+
+    background-color: blueviolet;
 }
 </style>
