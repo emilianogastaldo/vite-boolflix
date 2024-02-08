@@ -41,7 +41,7 @@ export default {
     <div class="show-card">
         <div class="show-img">
             <img v-if="show.poster_path" class="img-fluid d-block" :src="showImg" :alt="title">
-            <div v-else class="noflag"></div>
+            <div v-else class="noflag">NO IMG</div>
         </div>
         <ul>
             <li><strong>Titolo: </strong>{{ title }}</li>
