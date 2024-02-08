@@ -29,6 +29,9 @@ export default {
         },
         showVote() {
             return Math.floor(parseInt(this.show.vote_average) / 2);
+        },
+        maxVote() {
+            return 5
         }
     },
 }
@@ -41,13 +44,21 @@ export default {
             <img v-if="show.poster_path" class="img-fluid" :src="showImg" :alt="title">
             <div v-else class="noflag"> NO IMMAGINE </div>
         </li>
-        <li><strong>{{ title }}</strong></li>
+        <li><strong>{{ title }}</strong> </li>
         <li>{{ originalTitle }}</li>
         <li>
             <img v-if="isImage" class="img-fluid w-50" :src="flagImg" :alt="lang">
             <div v-else class="noflag">{{ lang }}</div>
         </li>
-        <li>{{ show.vote_average }} {{ showVote }}</li>
+        <li>
+            <div v-for="n in showVote" :key="n">
+                <i class="fas fa-star"></i>
+            </div>
+            <div v-for="n in maxVote - showVote" :key="n">
+                <i class="far fa-star"></i>
+            </div>
+            {{ showVote }}
+        </li>
     </ul>
 </template>
 
