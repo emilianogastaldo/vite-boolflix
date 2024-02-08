@@ -11,8 +11,10 @@ export default {
 
 <template>
     <main>
-        <SectionMain :shows="shows.listMovies" title="Movies" />
-        <SectionMain :shows="shows.listTvShows" title="TV Shows" />
+        <div class="container-fluid px-5">
+            <SectionMain :shows="shows.listMovies" title="Movies" />
+            <SectionMain :shows="shows.listTvShows" title="TV Shows" />
+        </div>
     </main>
 </template>
 
