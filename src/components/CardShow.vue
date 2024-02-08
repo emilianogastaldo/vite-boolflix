@@ -48,7 +48,7 @@ export default {
             <li><strong>Titolo originale: </strong>{{ originalTitle }}</li>
             <li>
                 <img v-if="isImage" class="img-fluid w-25" :src="flagImg" :alt="lang">
-                <div v-else class="noflag">{{ lang }}</div>
+                <div v-else class="noflag">Lingua: {{ lang }}</div>
             </li>
             <li>
                 <div class="d-flex gap-2">
@@ -65,8 +65,9 @@ export default {
 
 <style lang="scss" scoped>
 .show-card {
-    border: 1px solid white;
+    // box-shadow: 1px 1px 1px black;
     width: 300px;
+    height: 450px;
 }
 
 .show-card ul {
