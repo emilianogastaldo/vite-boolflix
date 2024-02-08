@@ -11,22 +11,18 @@ export default {
 </script>
 
 <template>
-    <main>
+    <section>
         <h4 v-if="shows.length">{{ title }}</h4>
-        <div class="row">
-            <div class="col-2" v-for="show in shows" :key="show.id">
-                <CardShow :show="show" />
+        <div class="row flex-nowrap">
+            <div class="col" v-for="show in shows" :key="show.id">
+                <CardShow :show="show" :maxVote="5" />
             </div>
         </div>
-    </main>
+    </section>
 </template>
 
 <style lang="scss" scoped>
-main {
+section {
     padding-top: 100px;
 }
-
-// .row {
-//     flex-wrap: nowrap;
-// }
 </style>
