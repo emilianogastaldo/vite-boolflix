@@ -5,20 +5,31 @@ export default {
         show: Object,
     },
     computed: {
-
-        getUrlImg() {
-            return new URL(`../assets/img/${this.show.original_language}.png`, import.meta.url).href
+        title() {
+            return this.show.title || this.show.name;
+        },
+        originalTitle() {
+            return this.show.original_title || this.show.original_name;
+        },
+        lang() {
+            return this.show.original_language;
+        },
+        isImage() {
+            const flags = ['en', 'it'];
+            return flags.includes(this.lang);
+        },
+        srcImg() {
+            return new URL(`../assets/img/${this.lang}.png`, import.meta.url).href;
         }
     },
 }
 </script>
 
 <template>
-    <p> <strong>{{ show.title }} {{ show.name }}</strong></p>
-    <p>{{ show.original_title }} {{ show.original_name }}</p>
-    <img v-if="show.original_language == 'en' || show.original_language == 'it'" class="img-fluid w-50" :src="getUrlImg"
-        :alt="show.original_language">
-    <div v-else class="noflag">{{ show.original_language }}</div>
+    <p> <strong>{{ title }}</strong></p>
+    <p>{{ originalTitle }}</p>
+    <img v-if="isImage" class="img-fluid w-50" :src="srcImg" :alt="lang">
+    <div v-else class="noflag">{{ lang }}</div>
     <p>{{ show.vote_average }}</p>
 </template>
 
