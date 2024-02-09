@@ -6,7 +6,7 @@ import AppMain from './components/AppMain.vue';
 // esempio endpointTV = 'https://api.themoviedb.org/3/search/tv?query=witcher&api_key=d0ca94f0f493b49910b826740d17bcd0';
 // esempio enpointMOVIE = 'https://api.themoviedb.org/3/search/movie?query=witcher&api_key=d0ca94f0f493b49910b826740d17bcd0';
 import { store } from './store/store';
-import { api } from './store/index';
+import { api, mapProductions } from './store/index';
 export default {
   name: 'BoolFlix',
   components: { AppHeader, AppMain },
@@ -37,11 +37,11 @@ export default {
         query: store.titleFilter,
         api_key: apiKey
       };
-      axios.get(`${baseUri}/${endpoint}`, { params }).then((res) => {
-        store[collection] = res.data.results
-      }).catch((err) => {
+      axios.get(`${baseUri}/${endpoint}`, { params }).then(res => {
+        store[collection] = res.data.results.map(mapProductions)
+      }).catch(err => {
         console.error(err);
-      });
+      })
     },
 
     fetchShows() {
@@ -59,7 +59,7 @@ export default {
 
 <template>
   <AppHeader @search-movies="fetchShows" @term-change="setTitleFilter" buttonLabel="Cerca" placeholder="Scrivi qui" />
-  <AppMain :shows="store" />
+  <AppMain :store="store" />
 </template>
 
 <style lang="scss">

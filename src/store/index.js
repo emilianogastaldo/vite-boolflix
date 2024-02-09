@@ -4,4 +4,13 @@ const api = {
     apiKey: 'd0ca94f0f493b49910b826740d17bcd0'
 }
 
-export { api }
+const mapProductions = p => ({
+    id: p.id,
+    title: p.name || p.title,
+    originalTitle: p.original_name || p.original_title,
+    overview: p.overview,
+    voteAverage: p.vote_average,
+    lang: p.original_language,
+    posterPath: p.poster_path
+})
+export { api, mapProductions }
