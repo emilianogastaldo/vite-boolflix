@@ -2,20 +2,17 @@
 export default {
     name: 'CardShow',
     props: {
-        show: Object,
+        id: Number,
+        title: String,
+        originalTitle: String,
+        overview: String,
+        voteAverage: Number,
+        lang: String,
+        posterPath: String || null,
         maxVote: Number,
     },
     computed: {
         // Creo delle computed per i titoli e scrivere più veloce la lingua
-        title() {
-            return this.show.title || this.show.name;
-        },
-        originalTitle() {
-            return this.show.original_title || this.show.original_name;
-        },
-        lang() {
-            return this.show.original_language;
-        },
 
         // controllo se c'è l'immagine che mi interessa, mi devo scrivere quali immagini io abbia
         isImage() {
@@ -27,10 +24,10 @@ export default {
         },
 
         showImg() {
-            return `https://image.tmdb.org/t/p/w342${this.show.poster_path}`
+            return `https://image.tmdb.org/t/p/w342${this.posterPath}`
         },
         showVote() {
-            return Math.floor(parseInt(this.show.vote_average) / 2);
+            return Math.floor(parseInt(this.voteAverage) / 2);
         },
     },
 }
@@ -40,25 +37,22 @@ export default {
     <!-- Card singola dello show -->
     <div class="show-card">
         <div class="show-img">
-            <img v-if="show.poster_path" class="img-fluid d-block" :src="showImg" :alt="title">
-            <div v-else class="noflag">NO IMG</div>
+            <img v-if="posterPath" class="img-fluid d-block" :src="showImg" :alt="title">
+            <img v-else src="https://www.altavod.com/assets/images/poster-placeholder.png" :alt="title">
         </div>
         <ul>
-            <li><strong>Titolo: </strong>{{ title }}</li>
-            <li><strong>Titolo originale: </strong>{{ originalTitle }}</li>
+            <li><strong>Title: </strong>{{ title }}</li>
+            <li><strong>Original Title: </strong>{{ originalTitle }}</li>
+            <li><strong>Overview: </strong>{{ overview }}</li>
             <li>
                 <img v-if="isImage" class="img-fluid w-25" :src="flagImg" :alt="lang">
-                <div v-else class="noflag">Lingua: {{ lang }}</div>
+                <div v-else class="noflag">Lenguage: {{ lang }}</div>
             </li>
             <li>
-                <div class="d-flex gap-2">
-                    Voto:
-                    <div v-for="i in maxVote" :key="i">
-                        <i v-if="i <= showVote" class="fas fa-star"></i>
-                        <i v-else class="far fa-star"></i>
-                    </div>
-                </div>
+                <span>Vote: </span>
+                <i v-for="i in maxVote" :key="i" class="fas fa-star" :class="i <= showVote ? 'fas' : 'far'"></i>
             </li>
+
         </ul>
     </div>
 </template>
@@ -66,17 +60,16 @@ export default {
 <style lang="scss" scoped>
 .show-card {
     // box-shadow: 1px 1px 1px black;
-    width: 300px;
-    height: 450px;
+    width: 340px;
+    border: 1px solid white;
 }
 
 .show-card ul {
-    height: 450px;
+    height: 500px;
     margin: 0;
     display: none;
     list-style-type: none;
     overflow-y: auto;
-    background-color: darkgray;
     padding: 0 1rem;
 
     li {
@@ -87,6 +80,12 @@ export default {
 .show-img {
     margin: 0;
     padding: 0;
+
+    img {
+        width: 340px;
+        height: 500px;
+        object-fit: cover;
+    }
 }
 
 .show-card:hover .show-img {
