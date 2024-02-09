@@ -1,6 +1,10 @@
 <script>
+import LogoHeader from './LogoHeader.vue';
 export default {
     name: 'AppHeader',
+    components: {
+        LogoHeader
+    },
     data: () => ({
         inputSearch: '',
     }),
@@ -14,9 +18,7 @@ export default {
 
 <template>
     <header>
-        <div class="logo">
-            <a href="#">LOGO SITO</a>
-        </div>
+        <LogoHeader />
         <form @submit.prevent="$emit('search-movies')" id="searchBar">
             <input @keyup="$emit('term-change', inputSearch)" type="text" :placeholder="placeholder"
                 v-model.trim="inputSearch">
@@ -34,12 +36,5 @@ header {
     justify-content: space-between;
     align-items: center;
     background-color: red;
-
-    .logo a {
-        text-decoration: none;
-        color: white;
-        border: 1px solid white;
-        padding: 1rem 2rem;
-    }
 }
 </style>
