@@ -8,7 +8,7 @@ export default {
         buttonLabel: String,
         placeholder: String
     },
-    emits: ['search-movies']
+    emits: ['search-movies', 'term-change']
 }
 </script>
 
@@ -17,8 +17,9 @@ export default {
         <div class="logo">
             <a href="#">LOGO SITO</a>
         </div>
-        <form @submit.prevent="$emit('search-movies', inputSearch)" id="searchBar">
-            <input type="text" :placeholder="placeholder" v-model.trim="inputSearch">
+        <form @submit.prevent="$emit('search-movies')" id="searchBar">
+            <input @keyup="$emit('term-change', inputSearch)" type="text" :placeholder="placeholder"
+                v-model.trim="inputSearch">
             <button>{{ buttonLabel }}</button>
         </form>
     </header>
