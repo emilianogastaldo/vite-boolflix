@@ -58,7 +58,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader @search-movies="fetchShows" @term-change="setTitleFilter" buttonLabel="Cerca" placeholder="Scrivi qui" />
+  <AppHeader @search-movies="fetchShows" @term-change="setTitleFilter" />
   <AppMain :store="store" />
 </template>
 

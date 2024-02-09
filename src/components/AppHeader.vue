@@ -1,17 +1,9 @@
 <script>
 import LogoHeader from './LogoHeader.vue';
+import FormSearch from './FormSearch.vue';
 export default {
     name: 'AppHeader',
-    components: {
-        LogoHeader
-    },
-    data: () => ({
-        inputSearch: '',
-    }),
-    props: {
-        buttonLabel: String,
-        placeholder: String
-    },
+    components: { LogoHeader, FormSearch },
     emits: ['search-movies', 'term-change']
 }
 </script>
@@ -19,11 +11,8 @@ export default {
 <template>
     <header>
         <LogoHeader />
-        <form @submit.prevent="$emit('search-movies')" id="searchBar">
-            <input @keyup="$emit('term-change', inputSearch)" type="text" :placeholder="placeholder"
-                v-model.trim="inputSearch">
-            <button>{{ buttonLabel }}</button>
-        </form>
+        <FormSearch @search-movies="$emit('search-movies')" @term-change="$emit('term-change', $event)" buttonLabel="Cerca"
+            placeholder="Scrivi qui" />
     </header>
 </template>
 
