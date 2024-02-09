@@ -4,7 +4,7 @@ export default {
     name: 'AppMain',
     components: { SectionMain },
     props: {
-        shows: Object
+        store: Object
     }
 }
 </script>
@@ -12,8 +12,8 @@ export default {
 <template>
     <main>
         <div class="container-fluid px-5">
-            <SectionMain :shows="shows.listMovies" title="Movies" />
-            <SectionMain :shows="shows.listTvShows" title="TV Shows" />
+            <SectionMain :shows="store.listMovies" title="Movies" />
+            <SectionMain :shows="store.listTvShows" title="TV Shows" />
         </div>
     </main>
 </template>
