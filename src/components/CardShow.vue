@@ -1,4 +1,6 @@
 <script>
+import axios from 'axios';
+import { api } from '../store/index';
 export default {
     name: 'CardShow',
     props: {
@@ -10,10 +12,31 @@ export default {
         lang: String,
         posterPath: String || null,
         maxVote: Number,
+        endpoint: String
+    },
+    data: () => ({
+        castList: [],
+    }),
+    methods: {
+        fetchCast() {
+            const { baseUri, apiKey } = api;
+            axios.get(`${baseUri}/${this.endpoint}/${this.id}/credits?api_key=${apiKey}`).then(
+                res => {
+                    this.castList = res.data.cast.slice(0, 5).map(c => ({
+                        id: c.id,
+                        name: c.name
+                    }))
+                }
+            ).catch(err => {
+                console.error(err);
+            })
+        },
+    },
+    created() {
+        this.fetchCast()
     },
     computed: {
         // Creo delle computed per i titoli e scrivere più veloce la lingua
-
         // controllo se c'è l'immagine che mi interessa, mi devo scrivere quali immagini io abbia
         isImage() {
             const flags = ['en', 'it'];
@@ -29,6 +52,14 @@ export default {
         showVote() {
             return Math.floor(parseInt(this.voteAverage) / 2);
         },
+        castListString() {
+            let message = '';
+            this.castList.forEach(e => (
+                message += e.name + ', '
+            ))
+            return message
+        }
+
     },
 }
 </script>
@@ -44,13 +75,14 @@ export default {
             <li><strong>Title: </strong>{{ title }}</li>
             <li><strong>Original Title: </strong>{{ originalTitle }}</li>
             <li><strong>Overview: </strong>{{ overview }}</li>
+            <li><strong>Cast: </strong>{{ castListString }}</li>
             <li>
                 <img v-if="isImage" class="img-fluid w-25" :src="flagImg" :alt="lang">
                 <div v-else class="noflag">Lenguage: {{ lang }}</div>
             </li>
             <li>
-                <span>Vote: </span>
-                <i v-for="i in maxVote" :key="i" class="fas fa-star" :class="i <= showVote ? 'fas' : 'far'"></i>
+                <span><strong>Vote: </strong></span>
+                <i v-for="i in maxVote" :key="i" class="fa-star" :class="i <= showVote ? 'fas' : 'far'"></i>
             </li>
 
         </ul>

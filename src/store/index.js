@@ -11,6 +11,7 @@ const mapProductions = p => ({
     overview: p.overview,
     voteAverage: p.vote_average,
     lang: p.original_language,
-    posterPath: p.poster_path
+    posterPath: p.poster_path,
+    genreIds: p.genre_ids
 })
 export { api, mapProductions }
