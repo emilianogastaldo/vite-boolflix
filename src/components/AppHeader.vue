@@ -33,6 +33,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: red;
 
     .logo a {
         text-decoration: none;
