@@ -54,6 +54,7 @@ export default {
         },
         castListString() {
             let message = '';
+            if (!this.castList.length) return message = '---'
             this.castList.forEach(e => (
                 message += e.name + ', '
             ))
